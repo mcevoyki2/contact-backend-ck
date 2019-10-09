@@ -5,7 +5,7 @@ const port = 3500;
 const bodyParser = require('body-parser');
 const cors = require('cors');
 var router = express.Router();
-app.use(cors())
+// app.use(cors())
 
 const transporter = nodemailer.createTransport({
 
