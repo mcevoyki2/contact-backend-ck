@@ -1,8 +1,11 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const app = express();
-const port = 3000;
+const port = 3500;
 const bodyParser = require('body-parser');
+const cors = require('cors');
+var router = express.Router();
+app.use(cors())
 
 const transporter = nodemailer.createTransport({
 
@@ -11,8 +14,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: ' ', // Enter here email address from which you want to send emails
-    pass: ' ' // Enter here password for email account from which you want to send emails
+    user: 'moveappowner@gmail.com', // Enter here email address from which you want to send emails
+    pass: 'Sack0fD1x' // Enter here password for email account from which you want to send emails
   },
   tls: {
   rejectUnauthorized: false
@@ -32,11 +35,12 @@ app.post('/send', function (req, res) {
 
   let senderName = req.body.contactFormName;
   let senderEmail = req.body.contactFormEmail;
+  let messageSubject = req.body.contactFormSubjects;
   let messageText = req.body.contactFormMessage;
-
+  let copyToSender = req.body.contactFormCopy;
 
   let mailOptions = {
-    to: [' '], // Enter here the email address on which you want to send emails from your customers
+    to: ['mcevoyki@gmail.com'], // Enter here the email address on which you want to send emails from your customers
     from: senderName,
     subject: messageSubject,
     text: messageText,
@@ -81,10 +85,10 @@ app.post('/send', function (req, res) {
 
   transporter.sendMail(mailOptions, function (error, response) {
     if (error) {
-      console.log(error);
+      // console.log(error);
       res.end('error');
     } else {
-      console.log('Message sent: ', response);
+      // console.log('Message sent: ', response);
       res.end('sent');
     }
   });
